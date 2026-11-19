@@ -252,3 +252,15 @@ Once you're done, submit it on the LMS. We go through them in the office hour.
 | `fastmcp list` on the deployed address asks you to sign in | Add `--auth none` to the command, and check Authentication is off on the Gateway page |
 
 Notes for this lecture: https://100x-curriculum.vercel.app/c8/module-2/lecture-12-building-with-tool-calling-and-mcp/notes
+
+### Step 6. Test the card
+
+For my custom supabase tools
+
+| Question | Should it ask for the tool? | Did it? |
+|---|---|---|
+| List the concepts available |Yes |Yes |
+| List cass for concept C04 |Yes |Yes |
+| How many cases does concept 01 have |Yes|Yes |
+| How to connect to printer socket? |No |No |
+| Generate cases for new concept: Firewall and networking |No |No |
