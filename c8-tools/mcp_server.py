@@ -7,11 +7,17 @@ from fastmcp import FastMCP
 
 SHEET = "https://docs.google.com/spreadsheets/d/1Kg6T-dJWaYx_JCPiRk3u0nBuAQcsCVRDPj1NFKP4WzM/gviz/tq?tqx=out:csv&headers=0&gid=368290478"
 
+
 mcp = FastMCP("100x curriculum")
 
-# Step 1. Move get_lecture here from tool_call.py and put @mcp.tool on the line above it.
-
-# Step 2. Write the card into the function itself: a docstring and a type hint.
+# Step 1 & 2. The function with its card (docstring and type hint)
+@mcp.tool
+def get_lecture(number: Annotated[int, "The lecture number, 1 to 19."]) -> dict:
+    """returns: details of a lecture; when to use: when user is asking specifically about a class or lecture in 100xEngineers cohort"""
+    for row in csv.reader(io.StringIO(requests.get(SHEET).text)):
+        if row[1].startswith(f"{number}. "):
+            return {"date": row[0], "title": row[1], "type": row[2], "tools": row[3]}
+    return {"error": f"There is no lecture {number}. Lectures run from 1 to 19."}
 
 
 # Any app can now reach it at http://localhost:8000/mcp
